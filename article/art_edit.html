@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入layui的css样式 -->
+    <link rel="stylesheet" href="/assets/lib/layui/css/layui.css">
+    <!-- 导入cropper的样式  图片裁剪 -->
+    <link rel="stylesheet" href="/assets/lib/cropper/cropper.css" />
+    <!-- 引入自己的css样式 -->
+    <link rel="stylesheet" href="/assets/css/article/art_edit.css">
+</head>
+
+<body>
+
+    <!-- 卡片面板区域 -->
+    <div class="layui-card">
+        <div class="layui-card-header">修改文章</div>
+        <div class="layui-card-body">
+            <!-- 修改文章的表单 -->
+            <form class="layui-form" lay-filter="addArticle" id="formAddArticle" enctype="multipart/form-data">
+                <!-- 文章标题 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                            autocomplete="off" class="layui-input" />
+                    </div>
+                </div>
+                <!-- 文章类别 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章类别</label>
+                    <div class="layui-input-block" id="art_cate"></div>
+                </div>
+                <!-- 文章内容 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章内容</label>
+                    <div class="layui-input-block" style="height: 400px;">
+                        <textarea name="content" id="content"></textarea>
+                    </div>
+                </div>
+                <!-- 文章封面 -->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文章封面</label>
+                    <div class="layui-input-block cropper-container">
+                        <!-- 文件选择框 -->
+                        <input type="file" id="fileCover" accept="image/jpeg,image/png,image/gif,image/bmp"
+                            style="display: none;" />
+                        <div class="cropper-box">
+                            <img id="image" src="">
+                        </div>
+
+                        <div class="right-box">
+                            <div class="img-preview"></div>
+                            <button class="layui-btn layui-btn-danger" id="btnChooseCoverImage">选择封面</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 按钮区域 -->
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit id="btnPublish">发布</button>
+                        <button class="layui-btn layui-btn-primary" lay-submit id="btnSave">存为草稿</button>
+                    </div>
+                </div>
+                <input type="hidden" name="Id" />
+            </form>
+        </div>
+    </div>
+
+    <!-- 文章分类列表的模板 -->
+    <script type="text/html" id="selectArtCates">
+          <select name="cate_id" lay-verify="required">
+            <option value="">请选择文章类别</option>
+            {{each data}}
+            <option value="{{$value.Id}}">{{$value.name}}</option>
+            {{/each}}
+          </select>
+        </script>
+
+
+    <!-- 导入layui的js -->
+    <script src="/assets/lib/layui/layui.all.js"></script>
+
+    <!-- 导入jQuery -->
+    <script src="/assets/lib/jquery.js"></script>
+
+    <!-- 导入cropper的js脚本文件 -->
+    <script src="/assets/lib/cropper/Cropper.js"></script>
+    <script src="/assets/lib/cropper/jquery-cropper.js"></script>
+
+    <!-- 导入模板引擎的js文件 -->
+    <script src="/assets/lib/template-web.js"></script>
+
+    <!-- 富文本 -->
+    <script src="/assets/lib/tinymce/tinymce.min.js"></script>
+    <script src="/assets/lib/tinymce/tinymce_setup.js"></script>
+
+
+    <!-- 导入baseAPI -->
+    <script src="/assets/js/baseAPI.js"></script>
+
+
+
+    <!-- 导入自己的js -->
+    <script src="/assets/js/article/art_edit.js"></script>
+</body>
+
+</html>
